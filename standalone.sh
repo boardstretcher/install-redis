@@ -1,5 +1,11 @@
 # centos 7
 # standalone redis 3.2.5 + systemd service
+cat << EOF > /etc/selinux/config
+SELINUX=disabled
+SELINUXTYPE=targeted
+EOF
+
+setenforce 0
 
 # download and compile
 wget http://download.redis.io/releases/redis-3.2.5.tar.gz
