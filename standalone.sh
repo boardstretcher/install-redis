@@ -10,7 +10,7 @@ EOF
 setenforce 0
 
 yum -y update
-yum -y install vim
+yum -y install vim wget
 
 # download and compile
 wget http://download.redis.io/releases/redis-3.2.5.tar.gz
