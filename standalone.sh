@@ -10,9 +10,10 @@ EOF
 setenforce 0
 
 yum -y update
-yum -y install vim wget
+yum -y install vim wget gcc
 
 # download and compile
+cd /root/
 wget http://download.redis.io/releases/redis-3.2.5.tar.gz
 tar xf redis-3.2.5.tar.gz
 cd redis-3.2.5/
