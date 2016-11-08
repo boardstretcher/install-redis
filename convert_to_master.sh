@@ -1,7 +1,7 @@
 # convert existing standalone to master
 
 echo "New password for the redis master? "
-read $redis_master_password
+read redis_master_password
 
 sed -i 's/appendonly no/appendonly yes/g' /etc/redis.conf
 sed -i 's/tcp-keepalive 300/tcp-keepalive 60/g' /etc/redis.conf
