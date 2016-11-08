@@ -32,8 +32,8 @@ After=network.target
 [Service]
 ExecStart=/usr/local/bin/redis-server /etc/redis.conf --daemonize no
 ExecStop=/usr/local/bin/redis-shutdown
-User=redis
-Group=redis
+User=root
+Group=root
 
 [Install]
 WantedBy=multi-user.target
@@ -95,7 +95,17 @@ hz 10
 aof-rewrite-incremental-fsync yes
 EOF
 
+# system settings
+echo "echo never > /sys/kernel/mm/transparent_hugepage/enabled" >> /etc/rc.local
+echo "redis soft nofile 100000" >> /etc/security/limits.conf
+echo "redis hard nofile 110000" >> /etc/security/limits.conf
+echo "vm.overcommit_memory = 1" >> /etc/sysctl.conf
+echo "net.core.somaxconn = 512" >> /etc/sysctl.conf
+echo never > /sys/kernel/mm/transparent_hugepage/enabled
+sysctl -p
+
 # start and test redis
+systemctl daemon-reload
 systemctl start redis
 sleep 5
 redis-benchmark -q -n 1000 -c 10 -P 5
