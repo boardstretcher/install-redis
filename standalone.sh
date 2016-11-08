@@ -1,11 +1,16 @@
 # centos 7
 # standalone redis 3.2.5 + systemd service
+
+# disable selinux and update centos
 cat << EOF > /etc/selinux/config
 SELINUX=disabled
 SELINUXTYPE=targeted
 EOF
 
 setenforce 0
+
+yum -y update
+yum -y install vim
 
 # download and compile
 wget http://download.redis.io/releases/redis-3.2.5.tar.gz
